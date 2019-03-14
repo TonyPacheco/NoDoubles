@@ -3,6 +3,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -45,7 +46,7 @@ class FindTourneyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_tourney)
-        supportActionBar?.title = getString(R.string.find_tourney)
+        supportActionBar?.title = Html.fromHtml("<font color=\"#00202b\">" + getString(R.string.find_tourney) + "</font>")
         ref = db.reference.child("tournaments")
         rec_list.setHasFixedSize(true)
 

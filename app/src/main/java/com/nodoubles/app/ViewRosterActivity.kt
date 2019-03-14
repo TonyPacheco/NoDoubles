@@ -6,6 +6,7 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -34,7 +35,7 @@ class ViewRosterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_roster)
-        supportActionBar?.title = getString(R.string.tourney_roster)
+        supportActionBar?.title = Html.fromHtml("<font color=\"#00202b\">" + getString(R.string.tourney_roster) + "</font>")
         nav_bar_roster.setOnNavigationItemSelectedListener{
             when (it.itemId){
                 R.id.view_fights -> {

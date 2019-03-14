@@ -3,6 +3,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.text.Html
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -23,7 +24,7 @@ class ViewFightsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_fights)
-        supportActionBar?.title = getString(R.string.match_schedule)
+        supportActionBar?.title = Html.fromHtml("<font color=\"#00202b\">" + getString(R.string.match_schedule) + "</font>")
         nav_bar_fights.setOnNavigationItemSelectedListener{
             when (it.itemId){
                 R.id.view_roster -> {
