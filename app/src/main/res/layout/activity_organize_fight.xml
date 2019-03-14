@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EditFighterActivity">
+
+    <TextView
+        android:id="@+id/fighter1title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Fighter 1:"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/fighter1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/fighter2title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fighter 2:"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/fighter2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/fightType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type:"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/fightDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Day:"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/fightTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Time:"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FightJudgeActivity">
+
+    <TextView
+        android:id="@+id/name1"
+        android:layout_width="172dp"
+        android:layout_height="39dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="26dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/name2"
+        android:layout_width="172dp"
+        android:layout_height="39dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/name1"
+        android:layout_marginEnd="64dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/minus1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/name1"
+        android:layout_marginTop="79dp"
+        android:background="@null"
+        android:tint="@color/colorPrimaryDark"
+        app:srcCompat="@drawable/ic_minus" />
+
+    <ImageView
+        android:id="@+id/doubleHit"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignTop="@+id/minus2"
+        android:layout_centerHorizontal="true"
+        android:background="@null"
+        android:tint="@color/colorPrimary"
+        app:srcCompat="@drawable/ic_double" />
+
+    <ImageView
+        android:id="@+id/plus1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/name1"
+        android:layout_alignTop="@+id/minus1"
+        android:background="@null"
+        android:tint="?attr/colorPrimaryDark"
+        app:srcCompat="@drawable/ic_plus" />
+
+    <ImageView
+        android:id="@+id/two1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/name1"
+        android:layout_alignTop="@+id/four1"
+        android:background="@null"
+        android:tint="?attr/colorPrimaryDark"
+        app:srcCompat="@drawable/ic_numeric_2_box" />
+
+    <ImageView
+        android:id="@+id/three1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/two1"
+        android:layout_marginStart="126dp"
+        android:background="@null"
+        android:tint="?attr/colorPrimaryDark"
+        app:srcCompat="@drawable/ic_numeric_3_box" />
+
+    <ImageView
+        android:id="@+id/four1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/name1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="112dp"
+        android:background="@null"
+        android:tint="?attr/colorPrimaryDark"
+        app:srcCompat="@drawable/ic_numeric_4_box" />
+
+    <ImageView
+        android:id="@+id/minus2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/name2"
+        android:layout_alignTop="@+id/minus1"
+        android:background="@null"
+        android:tint="@android:color/holo_red_dark"
+        app:srcCompat="@drawable/ic_minus" />
+
+    <ImageView
+        android:id="@+id/plus2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/name2"
+        android:layout_alignTop="@+id/minus1"
+        android:background="@null"
+        android:tint="@android:color/holo_red_dark"
+        app:srcCompat="@drawable/ic_plus" />
+
+    <ImageView
+        android:id="@+id/two2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/name2"
+        android:layout_alignTop="@+id/three1"
+        android:background="@null"
+        android:tint="@android:color/holo_red_dark"
+        app:srcCompat="@drawable/ic_numeric_2_box" />
+
+    <ImageView
+        android:id="@+id/three2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/three1"
+        android:layout_marginEnd="125dp"
+        android:background="@null"
+        android:tint="@android:color/holo_red_dark"
+        app:srcCompat="@drawable/ic_numeric_3_box" />
+
+    <ImageView
+        android:id="@+id/four2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/name2"
+        android:layout_alignTop="@+id/three1"
+        android:background="@null"
+        android:tint="@android:color/holo_red_dark"
+        app:srcCompat="@drawable/ic_numeric_4_box" />
+
+    <ImageView
+        android:id="@+id/closedDbl1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/three1"
+        android:layout_alignTop="@+id/minus2"
+        android:background="@null"
+        android:tint="?attr/colorPrimaryDark"
+        app:srcCompat="@drawable/ic_half" />
+
+    <ImageView
+        android:id="@+id/closedDbl2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/three2"
+        android:layout_alignTop="@+id/minus2"
+        android:background="@null"
+        android:tint="@android:color/holo_red_dark"
+        app:srcCompat="@drawable/ic_half" />
+
+    <Button
+        android:id="@+id/btn_end_fight"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:text="End Fight"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+    <TextView
+        android:id="@+id/pts1"
+        android:layout_width="50dp"
+        android:layout_height="39dp"
+        android:layout_alignTop="@+id/name1"
+        android:layout_toEndOf="@+id/name1"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/pts2"
+        android:layout_width="50dp"
+        android:layout_height="39dp"
+        android:layout_alignTop="@+id/name1"
+        android:layout_toStartOf="@+id/name2"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

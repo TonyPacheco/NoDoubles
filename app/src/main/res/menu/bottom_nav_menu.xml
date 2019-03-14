@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.comp3617.assignment2.DisplayTasksActivity">
+    <item
+        android:id="@+id/view_roster"
+        android:title="@string/roster"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_roseter"/>
+
+    <item
+        android:id="@+id/view_fights"
+        android:title="@string/fights"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_fights"/>
+</menu>

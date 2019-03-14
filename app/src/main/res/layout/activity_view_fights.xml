@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    tools:context=".ViewFightsActivity">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rec_list_fights"
+        android:layout_width="360dp"
+        android:layout_height="0dp"
+        android:background="@color/bg"
+        android:layout_weight="1"
+        android:layout_gravity="center"/>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/nav_bar_fights"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg"
+        app:itemIconTint="@color/colorPrimaryDark"
+        app:itemTextColor="@color/colorPrimaryDark"
+        app:menu="@menu/bottom_nav_menu" />
+
+</LinearLayout>

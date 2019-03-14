@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.comp3617.assignment2.DisplayTasksActivity">
+    <item
+        android:id="@+id/new_tourney"
+        android:title="@string/new_tournament"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/plus_circle"/>
+
+</menu>

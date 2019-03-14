@@ -1,0 +1,77 @@
+<resources>
+    <!--General-->
+    <string name="app_name">No Doubles</string>
+    <string name="find_tournament">Find Tournament</string>
+    <string name="organizer_login">Organizer Login</string>
+    <string name="tourney">Tournament</string>
+    <string name="wins_abrev">W:</string>
+    <string name="losses_abrev">L:</string>
+    <string name="points_abrev">P:</string>
+    <!--Menu Bar Titles-->
+    <string name="roster">Roster</string>
+    <string name="fights">Matches</string>
+    <!--Activity Titles-->
+    <string name="match_schedule">Match Schedule</string>
+    <string name="tourney_roster">Tournament Roster</string>
+    <string name="vs">VS</string>
+    <string name="string_final">FINAL</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="add_fight">Add Fight</string>
+    <string name="delete_fight">Delete Fight</string>
+    <string name="edit_fight">Edit Fight</string>
+    <string name="add_fighter">Add Fighter</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="import_fighters_csv">Import Fighters (csv)</string>
+    <string name="delete_fighter">Delete Fighter</string>
+    <string name="import_failed">Import Failed!</string>
+    <string name="error_parsing_csv">Error parsing csv!</string>
+    <string name="incorrect_header">Incorrectly formatted csv!</string>
+    <string name="delete_q">Delete?</string>
+    <string name="delete_warning">CAUTION! Delete cannot be undone AND will delete any fights that the fighter is in!</string>
+    <string name="DELETE">DELETE</string>
+    <string name="CANCEL">CANCEL</string>
+    <string name="import_fights_csv">Import Fights (csv)</string>
+    <string name="create_fight">Create Fight</string>
+    <string name="save">Save</string>
+    <string name="image_url">Image URL</string>
+    <string name="tournament_id">Tournament ID</string>
+    <string name="logout">Logout</string>
+    <string name="new_tournament">New Tournament</string>
+    <string name="tournament_name">Tournament Name</string>
+    <string name="photo_url">Photo URL</string>
+    <string name="edit_fighter">Edit Fighter</string>
+    <string name="edit_tourney">Edit Tournament</string>
+    <string name="new_tourney">New Tournament</string>
+    <string name="exit_tournament">Exit Tournament</string>
+    <string name="caution">Caution: This cannot be undone!</string>
+    <string name="reset_fight_q">Reset Fight?</string>
+    <string name="reset_fight_dialogue">This fight has already been concluded. Would you like to reset it?
+                                        This will remove the awarded wins/losses/points from before!</string>
+    <string name="cant_delete_in_prog">Cannot delete a fight in progress!</string>
+    <string name="caution_fight_completed_delete">Caution: This match has been concluded, deleting it now will lower the participants scores and remove wins/losses associated with this match!</string>
+    <string name="REPEAT">REPEAT</string>
+    <string name="RESET">RESET</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="AppTitleStyled">No Doubles - Tournament Assistant</string>
+    <string name="LOGIN">LOGIN</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="login_error">Login Error</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="find_tourney">Find Tournament</string>
+    <string name="no_doubles">No Doubles</string>
+</resources>

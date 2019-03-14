@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.comp3617.assignment2.DisplayTasksActivity">
+    <item
+        android:id="@+id/add_fighter"
+        android:title="@string/add_fighter"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_add_fighter"/>
+
+    <item
+        android:id="@+id/import_fighters"
+        android:title="@string/import_fighters_csv"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/log_out"
+        android:title="@string/logout"
+        app:showAsAction="never"/>
+
+</menu>
