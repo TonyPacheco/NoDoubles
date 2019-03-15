@@ -1,5 +1,4 @@
 package com.nodoubles.app
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -8,7 +7,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.nodoubles.app.Models.Fight
 import com.nodoubles.app.Models.Fighter
-import kotlinx.android.synthetic.main.activity_edit_fighter.*
 
 import kotlinx.android.synthetic.main.activity_fight_judge.*
 
@@ -28,94 +26,102 @@ class FightJudgeActivity : AppCompatActivity() {
         pts2!!.text = "0"
 
         minus1!!.setOnClickListener{
-            if(fighter1.currentScore > 0)
-                fighter1.addToCurrentScore(-1)
-            pingDb()
+            addScore(1,-1)
+            update()
         }
         minus2!!.setOnClickListener{
-            if(fighter2.currentScore > 0)
-                fighter2.addToCurrentScore(-1)
-            pingDb()
+            addScore(2, -1)
+            update()
         }
         closedDbl1!!.setOnClickListener{
-            fighter1.addToCurrentScore(2)
-            fighter2.addToCurrentScore(1)
-
-            pingDb()
+            addScore(1,2)
+            addScore(2,1)
+            update()
         }
         closedDbl2!!.setOnClickListener{
-            fighter1.addToCurrentScore(1)
-            fighter2.addToCurrentScore(2)
-            pingDb()
+            addScore(1,1)
+            addScore(2,2)
+            update()
         }
         plus1!!.setOnClickListener{
-            fighter1.addToCurrentScore(1)
-            pingDb()
+            addScore(1,1)
+            update()
         }
         plus2!!.setOnClickListener{
-            fighter2.addToCurrentScore(1)
-            pingDb()
+            addScore(2,1)
+            update()
         }
         two1!!.setOnClickListener{
-            fighter1.addToCurrentScore(2)
-            pingDb()
+            addScore(1,2)
+            update()
         }
         two2!!.setOnClickListener{
-            fighter2.addToCurrentScore(2)
-            pingDb()
+            addScore(2,2)
+            update()
         }
         three1!!.setOnClickListener{
-            fighter1.addToCurrentScore(3)
-            pingDb()
+            addScore(1,3)
+            update()
         }
         three2!!.setOnClickListener{
-            fighter2.addToCurrentScore(3)
-            pingDb()
+            addScore(2,3)
+            update()
         }
         four1!!.setOnClickListener{
-            fighter1.addToCurrentScore(4)
-            pingDb()
+            addScore(1,4)
+            update()
         }
         four2!!.setOnClickListener{
-            fighter2.addToCurrentScore(4)
-            pingDb()
+            addScore(2,4)
+            update()
         }
         doubleHit!!.setOnClickListener{
-            fighter1.addToCurrentScore(-1)
-            fighter2.addToCurrentScore(-1)
-            pingDb()
+            addScore(1,-1)
+            addScore(2,-1)
+            update()
         }
         btn_end_fight!!.setOnClickListener{
             finaliseFight()
         }
     }
 
-    private fun initPing() {
+    private fun addScore(fighter: Int, amt: Int){
+        when(fighter){
+            1 -> {
+                fighter1.addToCurrentScore(amt)
+                fight!!.fighter1Pts += amt
+            }
+            2-> {
+                fighter2.addToCurrentScore(amt)
+                fight!!.fighter2Pts += amt
+            }
+        }
+    }
+
+    private fun pingFight() {
         App.Globals.db.reference.child("fights")
                 .child(App.Globals.TourneyID.toString())
                 .child(fight?.id.toString())
                 .setValue(fight)
     }
 
-    private fun pingDb(){
+    private fun pingFighters(){
         App.Globals.db.reference.child("fighters")
                 .child(App.Globals.TourneyID.toString())
                 .child(fighter1.id.toString())
                 .setValue(fighter1)
+        
         App.Globals.db.reference.child("fighters")
                 .child(App.Globals.TourneyID.toString())
                 .child(fighter2.id.toString())
                 .setValue(fighter2)
-        pts1!!.text = fighter1.currentScore.toString()
-        pts2!!.text = fighter2.currentScore.toString()
     }
 
-    private fun finalPing(){
-        pingDb()
-        App.Globals.db.reference.child("fights")
-                .child(App.Globals.TourneyID.toString())
-                .child(fight?.id.toString())
-                .setValue(fight)
+    private fun update(){
+        pingFighters()
+        pingFight()
+        pts1!!.text = fighter1.currentScore.toString()
+        pts2!!.text = fighter2.currentScore.toString()
     }
 
     private fun manageFightEnd(){
@@ -133,11 +139,11 @@ class FightJudgeActivity : AppCompatActivity() {
 
     private fun finaliseFight(){
         manageFightEnd()
-        finalPing()
+        update()
         finish()
     }
 
-    fun getFightFromFb(fightId: Int){
+    private fun getFightFromFb(fightId: Int){
         val ref = App.Globals.db.reference.child("fights")
                 .child(App.Globals.TourneyID.toString())
                 .child(fightId.toString())
@@ -146,11 +152,11 @@ class FightJudgeActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 fight = dataSnapshot.getValue(Fight::class.java)
                 fight!!.startFight()
-                initPing()
                 fighter1 = fight!!.fighter1
                 fighter2 = fight!!.fighter2
                 name1!!.text = fighter1.getFullName()
                 name2!!.text = fighter2.getFullName()
+                update()
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Toast.makeText(baseContext, "Failed to load fight.",
