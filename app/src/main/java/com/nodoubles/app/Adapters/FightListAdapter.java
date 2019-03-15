@@ -102,8 +102,9 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
                             public void onClick(DialogInterface dialog, int which) {
                                 if(fight.getStatus() == Fight.Companion.getSTATUS_FINISHED()){
                                     resetPastFight(fight);
+                                } else {
+                                    deleteFight(fight);
                                 }
-                                deleteFight(fight);
                             }
                         });
                         alert.setNegativeButton(R.string.CANCEL, new DialogInterface.OnClickListener() {
@@ -135,9 +136,13 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
 
 
     private void deleteFight (final Fight fight){
-        resetPastFight(fight);
+        App.Globals.db
+                .getReference()
+                .child("fights")
+                .child(String.valueOf(App.Globals.INSTANCE.getTourneyID()))
+                .child(String.valueOf(fight.getId()))
+                .setValue(null);
     }
-
 
     private void resetPastFight(final Fight fight){
         final String tourneyID = String.valueOf(App.Globals.INSTANCE.getTourneyID());
@@ -202,12 +207,7 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
                 .child(tourneyID)
                 .child(String.valueOf(toAlter[1].getId()))
                 .setValue(toAlter[1]);
-        App.Globals.db
-                .getReference()
-                .child("fights")
-                .child(String.valueOf(App.Globals.INSTANCE.getTourneyID()))
-                .child(String.valueOf(fight.getId()))
-                .setValue(null);
+        deleteFight(fight);
     }
 
     private String generateTopText(Fight f){
