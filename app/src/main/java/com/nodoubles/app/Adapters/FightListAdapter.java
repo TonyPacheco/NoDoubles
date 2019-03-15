@@ -14,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.nodoubles.app.App;
 import com.nodoubles.app.FightJudgeActivity;
 import com.nodoubles.app.ImageDLTask;
@@ -29,6 +33,8 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
     private Context context;
     private ArrayList<Fight> fights;
     private Resources res;
+    private final Fighter[] toAlter = {null, null};
+    private boolean safeGuardTripped = false;
 
     public FightListAdapter(Context context, ArrayList<Fight> fights){
         this.fights = fights;
@@ -97,7 +103,7 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
                                 if(fight.getStatus() == Fight.Companion.getSTATUS_FINISHED()){
                                     resetPastFight(fight);
                                 }
-                                //deleteFight(fight);
+                                deleteFight(fight);
                             }
                         });
                         alert.setNegativeButton(R.string.CANCEL, new DialogInterface.OnClickListener() {
@@ -128,44 +134,80 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
     }
 
 
-//    private void deleteFight (final Fight fight){
-//        RealmConfiguration config = SyncUser.current()
-//                .createConfiguration(App.Globals.INSTANCE_ADDRESS + App.Globals.REALM)
-//                .build();
-//        Realm.getInstance(config).executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                ArrayList<Fight> res = realm
-//                        .where(Fight.class)
-//                        .equalTo("id", fight.getId())
-//                        .findAll();
-//                res.deleteAllFromRealm();
-//            }
-//        });
-//    }
+    private void deleteFight (final Fight fight){
+        resetPastFight(fight);
+    }
 
 
     private void resetPastFight(final Fight fight){
-        final Fighter fighter1 = fight.getFighter1();
-        final Fighter fighter2 = fight.getFighter2();
-        fighter1.setTourneyScore(fighter1.getTourneyScore() - fight.getFighter1Pts());
-        fighter2.setTourneyScore(fighter2.getTourneyScore() - fight.getFighter2Pts());
+        final String tourneyID = String.valueOf(App.Globals.INSTANCE.getTourneyID());
+        
+        final String fighter1ID = String.valueOf(fight.getFighter1().getId());
+        DatabaseReference ref1 = App.Globals.db.getReference()
+                .child("fighters")
+                .child(tourneyID)
+                .child(fighter1ID);
+        ValueEventListener listener1 = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                toAlter[0] = dataSnapshot.getValue(Fighter.class);
+                attemptDelete(fight);
+            }
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(context, "Failed to delete!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        };
+        ref1.addListenerForSingleValueEvent(listener1);
+
+        final String fighter2ID = String.valueOf(fight.getFighter2().getId());
+        DatabaseReference ref2 = App.Globals.db.getReference()
+                .child("fighters")
+                .child(tourneyID)
+                .child(fighter2ID);
+        ValueEventListener listener2 = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                toAlter[1] = dataSnapshot.getValue(Fighter.class);
+                attemptDelete(fight);
+            }
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(context, "Failed to delete!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        };
+        ref2.addListenerForSingleValueEvent(listener2);
+    }
+
+    private void attemptDelete(Fight fight) {
+        if(toAlter[0] == null || toAlter[1] == null || safeGuardTripped)
+            return;
+        safeGuardTripped = true;
+        final String tourneyID = String.valueOf(App.Globals.INSTANCE.getTourneyID());
+        toAlter[0].setTourneyScore(toAlter[0].getTourneyScore() - fight.getFighter1Pts());
+        toAlter[1].setTourneyScore(toAlter[1].getTourneyScore() - fight.getFighter2Pts());
         if(fight.getFighter1Pts() < fight.getFighter2Pts()){
-            fighter2.removeWin();
-            fighter1.removeLoss();
+            toAlter[1].removeWin();
+            toAlter[0].removeLoss();
         } else if (fight.getFighter1Pts() > fight.getFighter2Pts()) {
-            fighter1.removeWin();
-            fighter2.removeLoss();
+            toAlter[0].removeWin();
+            toAlter[1].removeLoss();
         } else {
-            fighter1.removeLoss();
-            fighter2.removeLoss();
+            toAlter[0].removeLoss();
+            toAlter[1].removeLoss();
         }
         App.Globals.db.getReference().child("fighters")
-                .child(String.valueOf(fighter1.getId()))
-                .setValue(fighter1);
+                .child(tourneyID)
+                .child(String.valueOf(toAlter[0].getId()))
+                .setValue(toAlter[0]);
         App.Globals.db.getReference().child("fighters")
-                .child(String.valueOf(fighter2.getId()))
-                .setValue(fighter2);
+                .child(tourneyID)
+                .child(String.valueOf(toAlter[1].getId()))
+                .setValue(toAlter[1]);
+        App.Globals.db
+                .getReference()
+                .child("fights")
+                .child(String.valueOf(App.Globals.INSTANCE.getTourneyID()))
+                .child(String.valueOf(fight.getId()))
+                .setValue(null);
     }
 
     private String generateTopText(Fight f){

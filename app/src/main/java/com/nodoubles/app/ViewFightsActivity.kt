@@ -80,7 +80,7 @@ class ViewFightsActivity : AppCompatActivity() {
                 for (postSnapshot in dataSnapshot.children) {
                     fights.add(postSnapshot.getValue(Fight::class.java)!!)
                 }
-                rec_list_fights.adapter = FightListAdapter(App.Globals.ctx(), fights)
+                rec_list_fights.adapter = FightListAdapter(this@ViewFightsActivity, fights)
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Toast.makeText(baseContext, "Failed to load fights.",
