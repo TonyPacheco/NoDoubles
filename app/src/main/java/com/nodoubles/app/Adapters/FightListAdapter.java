@@ -66,10 +66,7 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
                         alert.setPositiveButton(R.string.RESET, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                resetPastFight(fight);
-                                Intent i = new Intent(context, FightJudgeActivity.class);
-                                i.putExtra("fight", fight.getId());
-                                context.startActivity(i);
+                                resetPastFight(fight, true);
                             }
                         });
                         alert.setNegativeButton(R.string.CANCEL, new DialogInterface.OnClickListener() {
@@ -101,7 +98,7 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if(fight.getStatus() == Fight.Companion.getSTATUS_FINISHED()){
-                                    resetPastFight(fight);
+                                    resetPastFight(fight, false);
                                 } else {
                                     deleteFight(fight);
                                 }
@@ -134,17 +131,7 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
             h.imgR.setImageDrawable(res.getDrawable(R.drawable.ic_sword_cross));
     }
 
-
-    private void deleteFight (final Fight fight){
-        App.Globals.db
-                .getReference()
-                .child("fights")
-                .child(String.valueOf(App.Globals.INSTANCE.getTourneyID()))
-                .child(String.valueOf(fight.getId()))
-                .setValue(null);
-    }
-
-    private void resetPastFight(final Fight fight){
+    private void resetPastFight(final Fight fight, final boolean recreate){
         final String tourneyID = String.valueOf(App.Globals.INSTANCE.getTourneyID());
         
         final String fighter1ID = String.valueOf(fight.getFighter1().getId());
@@ -155,7 +142,7 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
         ValueEventListener listener1 = new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 toAlter[0] = dataSnapshot.getValue(Fighter.class);
-                attemptDelete(fight);
+                attemptDelete(fight, recreate);
             }
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(context, "Failed to delete!",
@@ -172,7 +159,7 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
         ValueEventListener listener2 = new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 toAlter[1] = dataSnapshot.getValue(Fighter.class);
-                attemptDelete(fight);
+                attemptDelete(fight, recreate);
             }
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(context, "Failed to delete!",
@@ -182,7 +169,7 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
         ref2.addListenerForSingleValueEvent(listener2);
     }
 
-    private void attemptDelete(Fight fight) {
+    private void attemptDelete(Fight fight, boolean recreate) {
         if(toAlter[0] == null || toAlter[1] == null || safeGuardTripped)
             return;
         safeGuardTripped = true;
@@ -207,7 +194,36 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
                 .child(tourneyID)
                 .child(String.valueOf(toAlter[1].getId()))
                 .setValue(toAlter[1]);
+        if(recreate)
+            cloneFight(fight);
         deleteFight(fight);
+    }
+
+
+    private void deleteFight (final Fight fight){
+        App.Globals.db
+                .getReference()
+                .child("fights")
+                .child(String.valueOf(App.Globals.INSTANCE.getTourneyID()))
+                .child(String.valueOf(fight.getId()))
+                .setValue(null);
+    }
+
+    private void cloneFight (final Fight fight){
+        Fight newFight = new Fight();
+        newFight.setFighter1(toAlter[0]);
+        newFight.setFighter2(toAlter[1]);
+        newFight.setStatus(Fight.Companion.getSTATUS_AWAITING());
+        newFight.setDay(fight.getDay());
+        newFight.setMatchType(fight.getMatchType());
+        newFight.setTime(fight.getTime());
+        newFight.setTourney(fight.getTourney());
+        App.Globals.db
+                .getReference()
+                .child("fights")
+                .child(String.valueOf(App.Globals.INSTANCE.getTourneyID()))
+                .child(String.valueOf(newFight.getId()))
+                .setValue(newFight);
     }
 
     private String generateTopText(Fight f){
