@@ -30,7 +30,10 @@ class EditFighterActivity : AppCompatActivity() {
 
     private fun initFields() {
         editingExisting = true
-        val ref = App.Globals.db.reference.child("fighters").child(fighterId.toString())
+        val ref = App.Globals.db.reference
+                .child("fighters")
+                .child(App.Globals.TourneyID.toString())
+                .child(fighterId.toString())
         val listener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 fighter = dataSnapshot.getValue(Fighter::class.java)
