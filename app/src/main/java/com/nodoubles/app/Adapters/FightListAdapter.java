@@ -210,14 +210,9 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
     }
 
     private void cloneFight (final Fight fight){
-        Fight newFight = new Fight();
-        newFight.setFighter1(toAlter[0]);
-        newFight.setFighter2(toAlter[1]);
-        newFight.setStatus(Fight.Companion.getSTATUS_AWAITING());
-        newFight.setDay(fight.getDay());
-        newFight.setMatchType(fight.getMatchType());
-        newFight.setTime(fight.getTime());
-        newFight.setTourney(fight.getTourney());
+        Fight newFight = new Fight(fight.getTourney(),
+                toAlter[0], toAlter[1],
+                fight.getMatchType(), fight.getDay(), fight.getTime());
         App.Globals.db
                 .getReference()
                 .child("fights")
