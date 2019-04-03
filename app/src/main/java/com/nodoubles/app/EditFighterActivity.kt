@@ -90,6 +90,9 @@ class EditFighterActivity : AppCompatActivity() {
     }
 
     private fun saveChanges(){
+        fighter!!.firstName = editFirstName.text.toString()
+        fighter!!.lastName  = editLastName.text.toString()
+        fighter!!.photoURL  = editUrl.text.toString()
         App.Globals.db.reference.child("fighters")
                 .child(App.Globals.TourneyID.toString())
                 .child(fighterId.toString())
