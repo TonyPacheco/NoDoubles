@@ -28,6 +28,7 @@ class FindTourneyActivity : AppCompatActivity() {
         super.onStart()
         val listener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                tournaments.clear()
                 for (postSnapshot in dataSnapshot.children) {
                     val t = postSnapshot.getValue(Tourney::class.java)!!
                     if(!isLoggedIn() || t.organizers.contains(App.Globals.auth.currentUser!!.uid))
