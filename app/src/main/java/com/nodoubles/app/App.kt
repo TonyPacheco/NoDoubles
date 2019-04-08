@@ -10,6 +10,7 @@ import com.nodoubles.app.App.Globals.auth
 import com.nodoubles.app.App.Globals.ctx
 import com.nodoubles.app.App.Globals.db
 import com.nodoubles.app.App.Globals.instance
+import com.nodoubles.app.Models.Tourney
 
 class App : Application() {
 
@@ -36,6 +37,7 @@ class App : Application() {
         }
 
         var TourneyID: Int = 0
+        var tourney: Tourney? = null
         var isAdmin = false
         const val CSV_REQUEST_INT = 42
         const val READ_SUCCESSFUL = 1

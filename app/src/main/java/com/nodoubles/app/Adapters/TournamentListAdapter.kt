@@ -36,6 +36,7 @@ class TournamentListAdapter(private val context: Context, private val tourneys: 
         h.title.text = tourney.name
         h.root.setOnClickListener {
             App.Globals.TourneyID = tourney.id
+            App.Globals.tourney = tourney
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             val editor = prefs.edit()
             editor.putInt("tourneyID", tourney.id)

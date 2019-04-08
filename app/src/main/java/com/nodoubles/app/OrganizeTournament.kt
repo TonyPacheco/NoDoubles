@@ -76,13 +76,17 @@ class OrganizeTournament : AppCompatActivity() {
             isImage = mimeType != null && mimeType.startsWith("image")
         } catch (e: Exception) { }
 
-        val tournament = Tourney(name, App.Globals.auth.currentUser!!.uid, if(isImage) url else "")
+        val tournament = Tourney(name,
+                App.Globals.auth.currentUser!!.uid,
+                if(isImage) url else "",
+                radio_group_scoring.checkedRadioButtonId)
 
         App.Globals.db.reference.child("tournaments")
                                 .child(tournament.id.toString())
                                 .setValue(tournament)
 
         App.Globals.TourneyID = tournament.id
+        App.Globals.tourney = tournament
         App.Globals.isAdmin = true
         startActivity(Intent(this, ViewRosterActivity::class.java))
         finish()

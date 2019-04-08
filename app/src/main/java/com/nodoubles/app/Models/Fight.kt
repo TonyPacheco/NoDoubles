@@ -3,9 +3,9 @@ package com.nodoubles.app.Models
 class Fight () {
 
     companion object {
-        val STATUS_AWAITING = 1
-        val STATUS_FIGHTING = 0
-        val STATUS_FINISHED = 2
+        const val STATUS_AWAITING = 1
+        const val STATUS_FIGHTING = 0
+        const val STATUS_FINISHED = 2
     }
     
      var id: Int = -1

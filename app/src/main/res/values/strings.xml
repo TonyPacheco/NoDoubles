@@ -74,4 +74,11 @@
     <string name="sign_up">SIGN UP</string>
     <string name="find_tourney">Find Tournament</string>
     <string name="no_doubles">No Doubles</string>
+    <string name="leg">Leg</string>
+    <string name="arm">Arm</string>
+    <string name="hand">Hand</string>
+    <string name="body">Body</string>
+    <string name="head">head</string>
+    <string name="default_scoring_system">Default Scoring System</string>
+    <string name="target_weighted_scoring_system">Target Weighted Scoring System</string>
 </resources>

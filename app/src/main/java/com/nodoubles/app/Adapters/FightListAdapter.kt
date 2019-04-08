@@ -18,7 +18,9 @@ import com.nodoubles.app.App
 import com.nodoubles.app.FightJudgeActivity
 import com.nodoubles.app.Models.Fight
 import com.nodoubles.app.Models.Fighter
+import com.nodoubles.app.Models.Tourney
 import com.nodoubles.app.R
+import com.nodoubles.app.WeightedFightJudgeActivity
 import com.squareup.picasso.Picasso
 import java.util.*
 
@@ -43,8 +45,12 @@ class FightListAdapter(private val context: Context, private val fights: ArrayLi
         val fight = fights[i]
         h.root.setOnClickListener {
             if (App.Globals.isAdmin) {
+                val intent: Intent
                 if (fight.status != Fight.STATUS_FINISHED) {
-                    val intent = Intent(context, FightJudgeActivity::class.java)
+                    intent = if(App.Globals.tourney!!.scoreType == Tourney.SCORE_TYPE_REGION_BASED_SCORE)
+                        Intent(context, WeightedFightJudgeActivity::class.java)
+                    else
+                        Intent(context, FightJudgeActivity::class.java)
                     intent.putExtra("fight", fight.id)
                     context.startActivity(intent)
                 } else {
