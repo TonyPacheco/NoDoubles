@@ -1,10 +1,12 @@
 package com.nodoubles.app.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,11 +22,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.nodoubles.app.App;
 import com.nodoubles.app.FightJudgeActivity;
-import com.nodoubles.app.ImageDLTask;
-import com.nodoubles.app.Models.*;
+import com.nodoubles.app.Models.Fight;
+import com.nodoubles.app.Models.Fighter;
 import com.nodoubles.app.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.CustomViewHolder> {
@@ -32,13 +36,17 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
     public int getItemCount() {return fights.size();}
     private Context context;
     private ArrayList<Fight> fights;
+    @SuppressLint("UseSparseArrays")
+    private HashMap<Integer, Bitmap> images = new HashMap<>();
+    private boolean firstLoad;
     private Resources res;
     private final Fighter[] toAlter = {null, null};
     private boolean safeGuardTripped = false;
 
-    public FightListAdapter(Context context, ArrayList<Fight> fights){
+    public FightListAdapter(Context context, ArrayList<Fight> fights, boolean firstLoad){
         this.fights = fights;
         this.context = context;
+        this.firstLoad = firstLoad;
         res = context.getResources();
     }
 
@@ -121,12 +129,21 @@ public class FightListAdapter extends RecyclerView.Adapter<FightListAdapter.Cust
         h.name1.setText(fight.getFighter1().getFirstName());
         h.name2.setText(fight.getFighter2().getFirstName());
         String url;
-        if((url = fight.getFighter1().getPhotoURL()) != null && !url.equals(""))
-            new ImageDLTask(h.imgL).execute(url);
+        if((url = fight.getFighter1().getPhotoURL()) != null && !url.isEmpty())
+            Picasso.get()
+                    .load(url)
+                    .placeholder(res.getDrawable(R.drawable.ic_sword_cross))
+                    .error(res.getDrawable(R.drawable.ic_sword_cross))
+                    .into(h.imgL);
         else
             h.imgL.setImageDrawable(res.getDrawable(R.drawable.ic_sword_cross));
-        if((url = fight.getFighter2().getPhotoURL()) != null && !url.equals(""))
-            new ImageDLTask(h.imgR).execute(url);
+
+        if((url = fight.getFighter2().getPhotoURL()) != null && !url.isEmpty())
+            Picasso.get()
+                    .load(url)
+                    .placeholder(res.getDrawable(R.drawable.ic_sword_cross))
+                    .error(res.getDrawable(R.drawable.ic_sword_cross))
+                    .into(h.imgR);
         else
             h.imgR.setImageDrawable(res.getDrawable(R.drawable.ic_sword_cross));
     }

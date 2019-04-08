@@ -1,7 +1,8 @@
 package com.nodoubles.app
+
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.text.Html
 import android.util.Log
@@ -11,15 +12,14 @@ import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-
 import com.nodoubles.app.Adapters.FightListAdapter
 import com.nodoubles.app.Models.Fight
-
 import kotlinx.android.synthetic.main.activity_view_fights.*
 
 class ViewFightsActivity : AppCompatActivity() {
 
     val fights = ArrayList<Fight>()
+    var firstLoad = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,16 +31,15 @@ class ViewFightsActivity : AppCompatActivity() {
                     val intent = Intent(this,ViewRosterActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     startActivity(intent)
-                    finish()//TODO:NOT THIS, reloads db on each press, but prevents app from re-entering here
+                    finish()/* TODO:NOT THIS, reloads db on each press, but prevents app from re-entering here */
                 }
             }
             true
         }
 
-        getFightsFromFb()
-
         rec_list_fights.setHasFixedSize(true)
-        rec_list_fights.adapter = FightListAdapter(this, fights)
+        //rec_list_fights.adapter = FightListAdapter(this, fights)
+        getFightsFromFb()
         rec_list_fights.layoutManager = LinearLayoutManager(this)
 
     }
@@ -80,7 +79,8 @@ class ViewFightsActivity : AppCompatActivity() {
                 for (postSnapshot in dataSnapshot.children) {
                     fights.add(postSnapshot.getValue(Fight::class.java)!!)
                 }
-                rec_list_fights.adapter = FightListAdapter(this@ViewFightsActivity, fights)
+                rec_list_fights.adapter = FightListAdapter(this@ViewFightsActivity, fights, firstLoad)
+                firstLoad = false /* this is so we don't reload images every update */
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Toast.makeText(baseContext, "Failed to load fights.",

@@ -15,9 +15,9 @@ import android.widget.TextView;
 
 import com.nodoubles.app.App;
 import com.nodoubles.app.EditFighterActivity;
-import com.nodoubles.app.ImageDLTask;
 import com.nodoubles.app.Models.Fighter;
 import com.nodoubles.app.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -84,7 +84,11 @@ public class RosterAdapter extends RecyclerView.Adapter<RosterAdapter.CustomView
         h.stats.setText(formatStats(fighter));
         String url = fighter.getPhotoURL();
         if(url != null && !url.equals(""))
-            new ImageDLTask(h.profile).execute(url);
+            Picasso.get()
+                    .load(url)
+                    .placeholder(res.getDrawable(R.drawable.ic_sword_cross))
+                    .error(res.getDrawable(R.drawable.ic_sword_cross))
+                    .into(h.profile);
         else
             h.profile.setImageDrawable(res.getDrawable(R.drawable.ic_sword_cross));
 

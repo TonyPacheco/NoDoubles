@@ -1,9 +1,9 @@
 package com.nodoubles.app.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,11 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nodoubles.app.App;
-import com.nodoubles.app.ImageDLTask;
 import com.nodoubles.app.Models.Tourney;
 import com.nodoubles.app.R;
 import com.nodoubles.app.ViewRosterActivity;
-
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -27,10 +26,12 @@ public class TournamentListAdapter extends RecyclerView.Adapter<TournamentListAd
     public int getItemCount() {return tourneys.size();}
     private Context context;
     private ArrayList<Tourney> tourneys;
+    private Resources res;
 
     public TournamentListAdapter(Context context, ArrayList<Tourney> tourneys){
         this.tourneys = tourneys;
         this.context = context;
+        this.res = context.getResources();
     }
 
     @Override
@@ -60,7 +61,11 @@ public class TournamentListAdapter extends RecyclerView.Adapter<TournamentListAd
         });
         String url = tourney.getPhotoURL();
         if(url!= null && !url.equals(""))
-            new ImageDLTask(h.photo).execute(url);
+            Picasso.get()
+                    .load(url)
+                    .placeholder(res.getDrawable(R.drawable.ic_sword_cross))
+                    .error(res.getDrawable(R.drawable.ic_sword_cross))
+                    .into(h.photo);
         else
             h.photo.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_sword_cross));
     }
