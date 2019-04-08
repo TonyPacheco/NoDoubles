@@ -49,7 +49,71 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/target_weighted_scoring_system" />
+            android:text="@string/target_weighted_scoring_system"/>
+
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/values_header"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:ems="10"
+        android:text="@string/target_point_values"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/input_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="18sp"
+        android:inputType="number"
+        android:hint="@string/head"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/input_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="18sp"
+        android:inputType="number"
+        android:hint="@string/body"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/input_arms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="18sp"
+        android:inputType="number"
+        android:hint="@string/arm"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/input_hands"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="18sp"
+        android:inputType="number"
+        android:hint="@string/hand"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/input_legs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="18sp"
+        android:inputType="number"
+        android:hint="@string/leg"
+        android:visibility="invisible"/>
+
 
 </LinearLayout>

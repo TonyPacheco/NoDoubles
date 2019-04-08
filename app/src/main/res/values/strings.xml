@@ -78,7 +78,8 @@
     <string name="arm">Arm</string>
     <string name="hand">Hand</string>
     <string name="body">Body</string>
-    <string name="head">head</string>
+    <string name="head">Head</string>
     <string name="default_scoring_system">Default Scoring System</string>
     <string name="target_weighted_scoring_system">Target Weighted Scoring System</string>
+    <string name="target_point_values">Target Point Values</string>
 </resources>

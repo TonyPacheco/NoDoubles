@@ -29,4 +29,10 @@ class Tourney() {
         this.scoreType = scoreType
     }
 
+    constructor(name: String, creator: String, photoURL: String, scoreType: Int, scheme: String) :
+            this(name, creator, photoURL, scoreType){
+        this.scoreSchemeId = scheme
+    }
+
+
 }
