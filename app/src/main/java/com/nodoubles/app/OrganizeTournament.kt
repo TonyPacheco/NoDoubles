@@ -76,10 +76,15 @@ class OrganizeTournament : AppCompatActivity() {
             isImage = mimeType != null && mimeType.startsWith("image")
         } catch (e: Exception) { }
 
+        val selectedScoring = if(radio_group_scoring.checkedRadioButtonId == radio_default.id)
+            Tourney.SCORE_TYPE_STANDARD_WEIGHTING
+        else
+            Tourney.SCORE_TYPE_REGION_BASED_SCORE
+
         val tournament = Tourney(name,
                 App.Globals.auth.currentUser!!.uid,
                 if(isImage) url else "",
-                radio_group_scoring.checkedRadioButtonId)
+                selectedScoring)
 
         App.Globals.db.reference.child("tournaments")
                                 .child(tournament.id.toString())
