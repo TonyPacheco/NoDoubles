@@ -42,7 +42,7 @@ class ViewRosterActivity : AppCompatActivity() {
                     val intent = Intent(this,ViewFightsActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     startActivity(intent)
-                    finish()//TODO:NOT THIS, reloads db on each press, but prevents app from re-entering here
+                    finish()/* TODO:NOT THIS, reloads db on each press, but prevents app from re-entering here */
                 }
             }
             true

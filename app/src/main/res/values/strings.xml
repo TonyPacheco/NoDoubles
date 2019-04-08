@@ -28,7 +28,7 @@
     <string name="error_parsing_csv">Error parsing csv!</string>
     <string name="incorrect_header">Incorrectly formatted csv!</string>
     <string name="delete_q">Delete?</string>
-    <string name="delete_warning">CAUTION! Delete cannot be undone AND will delete any fights that the fighter is in!</string>
+    <string name="delete_warning">CAUTION! Delete cannot be undone AND will delete any fights that the fighter is scheduled to be in!</string>
     <string name="DELETE">DELETE</string>
     <string name="CANCEL">CANCEL</string>
     <string name="import_fights_csv">Import Fights (csv)</string>

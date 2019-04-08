@@ -79,7 +79,7 @@ class ViewFightsActivity : AppCompatActivity() {
                 for (postSnapshot in dataSnapshot.children) {
                     fights.add(postSnapshot.getValue(Fight::class.java)!!)
                 }
-                rec_list_fights.adapter = FightListAdapter(this@ViewFightsActivity, fights, firstLoad)
+                rec_list_fights.adapter = FightListAdapter(this@ViewFightsActivity, fights)
                 firstLoad = false /* this is so we don't reload images every update */
             }
             override fun onCancelled(databaseError: DatabaseError) {
