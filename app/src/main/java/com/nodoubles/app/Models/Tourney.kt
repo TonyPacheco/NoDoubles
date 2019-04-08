@@ -5,7 +5,7 @@ class Tourney() {
     companion object {
         const val SCORE_TYPE_STANDARD_WEIGHTING = 0
         const val SCORE_TYPE_REGION_BASED_SCORE = 1
-        const val STANDARD_SCHEME_ID = "4_3_2_1_3"
+        const val STANDARD_SCHEME_ID = "4_3_2_1_3_1_-1_-2"
     }
 
     var id: Int = 0

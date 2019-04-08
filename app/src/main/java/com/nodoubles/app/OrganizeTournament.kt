@@ -7,6 +7,7 @@ import android.support.design.widget.TextInputEditText
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -16,6 +17,7 @@ import com.nodoubles.app.Models.Tourney
 import kotlinx.android.synthetic.main.activity_organize_tournament.*
 import java.net.URLConnection
 import com.nodoubles.app.R
+import kotlinx.android.synthetic.main.activity_view_fighter_stats.*
 
 class OrganizeTournament : AppCompatActivity() {
 
@@ -98,13 +100,18 @@ class OrganizeTournament : AppCompatActivity() {
                     .child(tournament!!.id.toString())
                     .setValue(tournament)
         } else {
-            val scheme = ScoreScheme(
-                    Integer.valueOf(input_head.text.toString()),
-                    Integer.valueOf(input_body.text.toString()),
-                    Integer.valueOf(input_arms.text.toString()),
-                    Integer.valueOf(input_hands.text.toString()),
-                    Integer.valueOf(input_legs.text.toString())
-            )
+
+            val head = if(!empty(input_head))     Integer.valueOf(input_head.text.toString())     else 0
+            val body = if(!empty(input_body))     Integer.valueOf(input_body.text.toString())     else 0
+            val arms = if(!empty(input_arms))     Integer.valueOf(input_arms.text.toString())     else 0
+            val hand = if(!empty(input_hands))    Integer.valueOf(input_hands.text.toString())    else 0
+            val legs = if(!empty(input_legs))     Integer.valueOf(input_legs.text.toString())     else 0
+            val clsg = if(!empty(input_closed_g)) Integer.valueOf(input_closed_g.text.toString()) else 0
+            val clsr = if(!empty(input_closed_r)) Integer.valueOf(input_closed_r.text.toString()) else 0
+            val open = if(!empty(input_open))     Integer.valueOf(input_open.text.toString())     else 0
+
+            val scheme = ScoreScheme(head,body,arms,hand,legs,clsg,clsr,open)
+
             App.Globals.db.reference.child("schemes")
                     .child(scheme.id)
                     .setValue(scheme)
@@ -127,6 +134,10 @@ class OrganizeTournament : AppCompatActivity() {
         finish()
     }
 
+    private fun empty (inp: EditText) : Boolean {
+        return inp.text.isNullOrEmpty()
+    }
+
     private fun toggleValuesVisibility(vis: Int){
         values_header.visibility = vis
         input_head.visibility = vis
@@ -135,6 +146,18 @@ class OrganizeTournament : AppCompatActivity() {
         input_hands.visibility = vis
         input_legs.visibility = vis
         input_track_hits.visibility = vis
+        head_label.visibility = vis
+        body_label.visibility = vis
+        arm_label.visibility = vis
+        hand_label.visibility = vis
+        leg_label.visibility = vis
+        input_open.visibility = vis
+        input_closed_g.visibility = vis
+        input_closed_r.visibility = vis
+        closed_label_g.visibility = vis
+        closed_label_r.visibility = vis
+        open_label.visibility = vis
+
     }
 
 }

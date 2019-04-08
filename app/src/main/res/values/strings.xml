@@ -92,4 +92,8 @@
     <string name="fighter_stats">Fighter Stats</string>
     <string name="closed_dbs">Closed Dbs</string>
     <string name="open_doubles">Open Doubles</string>
+    <string name="closed_double">Closed Double</string>
+    <string name="open_double">Open Double</string>
+    <string name="lose_closed_db">Lose Closed Db</string>
+    <string name="gain_closed_db">Gain Closed Db</string>
 </resources>

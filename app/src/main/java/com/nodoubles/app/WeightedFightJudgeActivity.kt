@@ -42,25 +42,6 @@ class WeightedFightJudgeActivity : AppCompatActivity() {
             addScore(2, -1)
             update()
         }
-        closedDbl1!!.setOnClickListener{
-            addScore(1,2)
-            addScore(2,1)
-            fighter1.closedDbGiven++
-            update()
-        }
-        closedDbl2!!.setOnClickListener {
-            addScore(1, 1)
-            addScore(2, 2)
-            fighter2.closedDbGiven++
-            update()
-        }
-        doubleHit!!.setOnClickListener{
-            addScore(1,-1)
-            addScore(2,-1)
-            fighter1.openDbExchngs++
-            fighter2.openDbExchngs++
-            update()
-        }
         btn_end_fight!!.setOnClickListener{
             finaliseFight()
         }
@@ -125,6 +106,25 @@ class WeightedFightJudgeActivity : AppCompatActivity() {
             addScore(2,scheme.legs)
             fighter2.legsHitsGiven++
             fighter1.legsHitsRecvd++
+            update()
+        }
+        closedDbl1!!.setOnClickListener{
+            addScore(1,scheme.clsg)
+            addScore(2,scheme.clsr)
+            fighter1.closedDbGiven++
+            update()
+        }
+        closedDbl2!!.setOnClickListener {
+            addScore(1, scheme.clsr)
+            addScore(2, scheme.clsg)
+            fighter2.closedDbGiven++
+            update()
+        }
+        doubleHit!!.setOnClickListener{
+            addScore(1,scheme.open)
+            addScore(2,scheme.open)
+            fighter1.openDbExchngs++
+            fighter2.openDbExchngs++
             update()
         }
     }
