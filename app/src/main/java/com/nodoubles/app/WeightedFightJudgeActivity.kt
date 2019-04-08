@@ -45,16 +45,20 @@ class WeightedFightJudgeActivity : AppCompatActivity() {
         closedDbl1!!.setOnClickListener{
             addScore(1,2)
             addScore(2,1)
+            fighter1.closedDbGiven++
             update()
         }
         closedDbl2!!.setOnClickListener {
             addScore(1, 1)
             addScore(2, 2)
+            fighter2.closedDbGiven++
             update()
         }
         doubleHit!!.setOnClickListener{
             addScore(1,-1)
             addScore(2,-1)
+            fighter1.openDbExchngs++
+            fighter2.openDbExchngs++
             update()
         }
         btn_end_fight!!.setOnClickListener{
@@ -62,91 +66,66 @@ class WeightedFightJudgeActivity : AppCompatActivity() {
         }
     }
 
-    private fun initButtons(scheme: ScoreScheme?){
-        if(scheme != null){
-            hand1!!.setOnClickListener{
-                addScore(1,scheme.hand)
-                update()
-            }
-            hand2!!.setOnClickListener{
-                addScore(2,scheme.hand)
-                update()
-            }
-            arm1!!.setOnClickListener{
-                addScore(1,scheme.arms)
-                update()
-            }
-            arm2!!.setOnClickListener{
-                addScore(2,scheme.arms)
-                update()
-            }
-            body1!!.setOnClickListener{
-                addScore(1,scheme.body)
-                update()
-            }
-            body2!!.setOnClickListener{
-                addScore(2,scheme.body)
-                update()
-            }
-            head1!!.setOnClickListener{
-                addScore(1,scheme.head)
-                update()
-            }
-            head2!!.setOnClickListener{
-                addScore(2,scheme.head)
-                update()
-            }
-            leg1!!.setOnClickListener{
-                addScore(1,scheme.legs)
-                update()
-            }
-            leg2!!.setOnClickListener{
-                addScore(2,scheme.legs)
-                update()
-            }
+    private fun initButtons(scheme: ScoreScheme){
+        hand1!!.setOnClickListener{
+            addScore(1,scheme.hand)
+            fighter1.handHitsGiven++
+            fighter2.handHitsRecvd++
+            update()
         }
-        else
-        {
-            hand1!!.setOnClickListener{
-                addScore(1,1)
-                update()
-            }
-            hand2!!.setOnClickListener{
-                addScore(2,1)
-                update()
-            }
-            arm1!!.setOnClickListener{
-                addScore(1,2)
-                update()
-            }
-            arm2!!.setOnClickListener{
-                addScore(2,2)
-                update()
-            }
-            body1!!.setOnClickListener{
-                addScore(1,3)
-                update()
-            }
-            body2!!.setOnClickListener{
-                addScore(2,3)
-                update()
-            }
-            head1!!.setOnClickListener{
-                addScore(1,4)
-                update()
-            }
-            head2!!.setOnClickListener{
-                addScore(2,4)
-                update()
-            }
-            leg1!!.setOnClickListener{
-                addScore(1,4)
-                update()
-            }
-            leg2!!.setOnClickListener{
-                addScore(2,4)
-                update()
-            }
+        hand2!!.setOnClickListener{
+            addScore(2,scheme.hand)
+            fighter2.handHitsGiven++
+            fighter1.handHitsRecvd++
+            update()
+        }
+        arm1!!.setOnClickListener{
+            addScore(1,scheme.arms)
+            fighter1.armsHitsGiven++
+            fighter2.armsHitsRecvd++
+            update()
+        }
+        arm2!!.setOnClickListener{
+            addScore(2,scheme.arms)
+            fighter2.armsHitsGiven++
+            fighter1.armsHitsRecvd++
+            update()
+        }
+        body1!!.setOnClickListener{
+            addScore(1,scheme.body)
+            fighter1.bodyHitsGiven++
+            fighter2.bodyHitsRecvd++
+            update()
+        }
+        body2!!.setOnClickListener{
+            addScore(2,scheme.body)
+            fighter2.bodyHitsGiven++
+            fighter1.bodyHitsRecvd++
+            update()
+        }
+        head1!!.setOnClickListener{
+            addScore(1,scheme.head)
+            fighter1.headHitsGiven++
+            fighter2.headHitsRecvd++
+            update()
+        }
+        head2!!.setOnClickListener{
+            addScore(2,scheme.head)
+            fighter2.headHitsGiven++
+            fighter1.headHitsRecvd++
+            update()
+        }
+        leg1!!.setOnClickListener{
+            addScore(1,scheme.legs)
+            fighter1.legsHitsGiven++
+            fighter2.legsHitsRecvd++
+            update()
+        }
+        leg2!!.setOnClickListener{
+            addScore(2,scheme.legs)
+            fighter2.legsHitsGiven++
+            fighter1.legsHitsRecvd++
+            update()
         }
     }
 
@@ -238,7 +217,7 @@ class WeightedFightJudgeActivity : AppCompatActivity() {
         val listener = object : ValueEventListener {
             override fun onDataChange(scheme: DataSnapshot) {
                 val s = scheme.getValue(ScoreScheme::class.java)
-                initButtons(s)
+                initButtons(s!!)
             }
             override fun onCancelled(p0: DatabaseError) {
                 Toast.makeText(baseContext, "Failed to load fight scheme.",

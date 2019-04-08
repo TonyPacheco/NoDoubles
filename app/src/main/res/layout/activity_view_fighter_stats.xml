@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ViewFighterStats">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="center"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/fighter_name"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="10sp"
+            android:gravity="start|center_vertical"
+            android:textColor="@color/colorText"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/fighter_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="start"
+            android:adjustViewBounds="false" />
+
+        <TextView
+            android:id="@+id/fighter_stats"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="end"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </android.support.v7.widget.CardView>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="@string/target"
+                android:layout_width="100dp"/>
+            <TextView
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="@string/given"
+                android:layout_width="100dp"/>
+            <TextView
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="@string/received"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="19sp"
+                android:text="@string/head"/>
+            <TextView
+                android:id="@+id/head_g"
+                android:textSize="19sp"/>
+            <TextView
+                android:id="@+id/head_r"
+                android:textSize="19sp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="19sp"
+                android:text="@string/body"/>
+            <TextView
+                android:id="@+id/body_g"
+                android:textSize="19sp"/>
+            <TextView
+                android:id="@+id/body_r"
+                android:textSize="19sp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="19sp"
+                android:text="@string/arm"/>
+            <TextView
+                android:id="@+id/arms_g"
+                android:textSize="19sp"/>
+            <TextView
+                android:id="@+id/arms_r"
+                android:textSize="19sp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="19sp"
+                android:text="@string/hand"/>
+            <TextView
+                android:id="@+id/hand_g"
+                android:textSize="19sp"/>
+            <TextView
+                android:id="@+id/hand_r"
+                android:textSize="19sp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="19sp"
+                android:text="@string/leg"/>
+            <TextView
+                android:id="@+id/legs_g"
+                android:textSize="19sp"/>
+            <TextView
+                android:id="@+id/legs_r"
+                android:textSize="19sp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="19sp"
+                android:text="@string/closed_dbs"/>
+            <TextView
+                android:id="@+id/clos_g"
+                android:textSize="19sp" />
+            <TextView
+                android:id="@+id/clos_r"
+                android:textSize="19sp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:text="@string/open_doubles"/>
+            <TextView
+                android:id="@+id/open_d"
+                android:textSize="19sp" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

@@ -82,4 +82,14 @@
     <string name="default_scoring_system">Default Scoring System</string>
     <string name="target_weighted_scoring_system">Target Weighted Scoring System</string>
     <string name="target_point_values">Target Point Values</string>
+    <string name="track_fighters_hit_targets">Track fighters hit targets</string>
+    <string name="name_placeholder">NAME</string>
+    <string name="head_hits_received">Head Hits Received</string>
+    <string name="head_hits_given">Head Hits Given</string>
+    <string name="target">Target</string>
+    <string name="given">Given</string>
+    <string name="received">Received</string>
+    <string name="fighter_stats">Fighter Stats</string>
+    <string name="closed_dbs">Closed Dbs</string>
+    <string name="open_doubles">Open Doubles</string>
 </resources>

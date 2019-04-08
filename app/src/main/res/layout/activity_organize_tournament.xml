@@ -115,5 +115,13 @@
         android:hint="@string/leg"
         android:visibility="invisible"/>
 
+    <CheckBox
+        android:id="@+id/input_track_hits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/track_fighters_hit_targets"
+        android:visibility="invisible"
+        />
+
 
 </LinearLayout>

@@ -20,6 +20,7 @@ import com.nodoubles.app.EditFighterActivity
 import com.nodoubles.app.Models.Fight
 import com.nodoubles.app.Models.Fighter
 import com.nodoubles.app.R
+import com.nodoubles.app.ViewFighterStats
 import com.squareup.picasso.Picasso
 
 import java.util.ArrayList
@@ -43,9 +44,27 @@ class RosterAdapter(private val context: Context, private val fighters: ArrayLis
         val fighter = fighters[i]
         h.root.setOnClickListener {
             if (App.Globals.isAdmin) {
-                val i = Intent(context, EditFighterActivity::class.java)
-                i.putExtra("fighter", fighter.id)
-                context.startActivity(i)
+                if(App.Globals.tourney!!.trackUserHits){
+                    val alert = AlertDialog.Builder(context)
+                    alert.setTitle("Fighter")
+                    alert.setMessage("View Stats or Edit Fighter?")
+                    alert.setPositiveButton("Stats") { _,_ ->
+                        val i = Intent(context, ViewFighterStats::class.java)
+                        i.putExtra("fighter", fighter.id)
+                        context.startActivity(i)
+                    }
+                    alert.setNegativeButton("Edit")  { _,_ ->
+                        val i = Intent(context, EditFighterActivity::class.java)
+                        i.putExtra("fighter", fighter.id)
+                        context.startActivity(i)
+                    }
+                    alert.show()
+                } else {
+                    val i = Intent(context, EditFighterActivity::class.java)
+                    i.putExtra("fighter", fighter.id)
+                    context.startActivity(i)
+                }
+
             }
         }
         h.root.setOnLongClickListener {

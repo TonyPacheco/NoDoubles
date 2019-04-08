@@ -113,7 +113,8 @@ class OrganizeTournament : AppCompatActivity() {
                     App.Globals.auth.currentUser!!.uid,
                     if(isImage) url else "",
                     Tourney.SCORE_TYPE_REGION_BASED_SCORE,
-                    scheme.id)
+                    scheme.id,
+                    input_track_hits.isChecked)
             App.Globals.db.reference.child("tournaments")
                     .child(tournament!!.id.toString())
                     .setValue(tournament)
@@ -133,6 +134,7 @@ class OrganizeTournament : AppCompatActivity() {
         input_arms.visibility = vis
         input_hands.visibility = vis
         input_legs.visibility = vis
+        input_track_hits.visibility = vis
     }
 
 }

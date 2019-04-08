@@ -3,6 +3,7 @@ package com.nodoubles.app
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -25,7 +26,7 @@ class EditFighterActivity : AppCompatActivity() {
         fighterId = intent.getIntExtra("fighter", -1)
         if(fighterId != -1)
             initFields()
-        supportActionBar?.title = if(editingExisting) getString(R.string.edit_fighter) else getString(R.string.add_fighter)
+        supportActionBar?.title = if(editingExisting) Html.fromHtml("<font color=\"#00202b\">" + getString(R.string.edit_fighter) + "</font>") else Html.fromHtml("<font color=\"#00202b\">" + getString(R.string.add_fighter) + "</font>")
     }
 
     private fun initFields() {
@@ -102,6 +103,7 @@ class EditFighterActivity : AppCompatActivity() {
         finish()
     }
 
+    /* Why do I have this? */
     private fun imageUrlParser(url: String): String? {
         var isImage = false
         try {

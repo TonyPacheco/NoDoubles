@@ -16,6 +16,7 @@ class Tourney() {
 
     var scoreType: Int = SCORE_TYPE_STANDARD_WEIGHTING
     var scoreSchemeId: String = STANDARD_SCHEME_ID
+    var trackUserHits = false
 
     init {
         id = System.currentTimeMillis().toInt() % Integer.MAX_VALUE
@@ -29,10 +30,10 @@ class Tourney() {
         this.scoreType = scoreType
     }
 
-    constructor(name: String, creator: String, photoURL: String, scoreType: Int, scheme: String) :
+    constructor(name: String, creator: String, photoURL: String, scoreType: Int, scheme: String, trackHits: Boolean) :
             this(name, creator, photoURL, scoreType){
-        this.scoreSchemeId = scheme
+        scoreSchemeId = scheme
+        trackUserHits = trackHits
     }
-
 
 }
