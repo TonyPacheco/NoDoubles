@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TextInputEditText
+import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -57,6 +58,15 @@ class OrganizeTournament : AppCompatActivity() {
             defaultScoring = false
             toggleValuesVisibility(View.VISIBLE)
         }
+        radio_password.setOnClickListener{
+            input_pass.visibility = View.VISIBLE
+        }
+        radio_open.setOnClickListener{
+            input_pass.visibility = View.INVISIBLE
+        }
+        radio_private.setOnClickListener{
+            input_pass.visibility = View.INVISIBLE
+        }
     }
 
     private fun initFields(id: Int){
@@ -84,6 +94,26 @@ class OrganizeTournament : AppCompatActivity() {
     private fun saveTournamentNew(){
         val name = editTourneyName.text.toString()
         val url: String = editTourneyPhotoURL.text.toString()
+        val privacy = when(radio_group_privacy.checkedRadioButtonId){
+            radio_password.id -> Tourney.PRIVACY_PASSWRD
+            radio_open.id     -> Tourney.PRIVACY_OPEN
+            radio_private.id  -> Tourney.PRIVACY_PRIVATE
+            else              -> Tourney.PRIVACY_OPEN
+        }
+        var password = ""
+        if(privacy == Tourney.PRIVACY_PASSWRD){
+            if(empty(input_pass)){
+                val alert = AlertDialog.Builder(this)
+                alert.setTitle("Error!")
+                alert.setMessage("Password is required for password protected tournaments!")
+                alert.setPositiveButton("Ok") { a, _ -> a.dismiss()}
+                alert.show()
+                return
+            } else {
+                password = input_pass.text.toString()
+            }
+
+        }
         var isImage = false
         try {
             val mimeType = URLConnection.guessContentTypeFromName(url)
@@ -94,7 +124,9 @@ class OrganizeTournament : AppCompatActivity() {
             tournament = Tourney(name,
                     App.Globals.auth.currentUser!!.uid,
                     if(isImage) url else "",
-                    Tourney.SCORE_TYPE_STANDARD_WEIGHTING)
+                    Tourney.SCORE_TYPE_STANDARD_WEIGHTING,
+                    privacy,
+                    password)
 
             App.Globals.db.reference.child("tournaments")
                     .child(tournament!!.id.toString())
@@ -121,7 +153,9 @@ class OrganizeTournament : AppCompatActivity() {
                     if(isImage) url else "",
                     Tourney.SCORE_TYPE_REGION_BASED_SCORE,
                     scheme.id,
-                    input_track_hits.isChecked)
+                    input_track_hits.isChecked,
+                    privacy,
+                    password)
             App.Globals.db.reference.child("tournaments")
                     .child(tournament!!.id.toString())
                     .setValue(tournament)
@@ -157,7 +191,6 @@ class OrganizeTournament : AppCompatActivity() {
         closed_label_g.visibility = vis
         closed_label_r.visibility = vis
         open_label.visibility = vis
-
     }
 
 }

@@ -33,6 +33,38 @@
         android:textStyle="bold" />
 
     <RadioGroup
+        android:id="@+id/radio_group_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
+        <RadioButton
+            android:id="@+id/radio_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/open_to_public"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/radio_private"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/organizers_only"/>
+        <RadioButton
+            android:id="@+id/radio_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/password_protected"/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/input_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:visibility="invisible"/>
+
+    <RadioGroup
         android:id="@+id/radio_group_scoring"
         android:layout_width="match_parent"
         android:layout_height="65dp">

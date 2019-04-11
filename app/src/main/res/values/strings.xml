@@ -96,4 +96,8 @@
     <string name="open_double">Open Double</string>
     <string name="lose_closed_db">Lose Closed Db</string>
     <string name="gain_closed_db">Gain Closed Db</string>
+    <string name="_private">Private</string>
+    <string name="open_to_public">Open to public</string>
+    <string name="password_protected">Password protected</string>
+    <string name="organizers_only">Organizers only</string>
 </resources>

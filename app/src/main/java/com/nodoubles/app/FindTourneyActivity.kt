@@ -1,4 +1,5 @@
 package com.nodoubles.app
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -23,18 +24,28 @@ class FindTourneyActivity : AppCompatActivity() {
 
     private var ref = App.Globals.db.reference.child("tournaments")
     private var tournaments: ArrayList<Tourney> = ArrayList()
+    private val ctx: Context = this
 
     override fun onStart() {
         super.onStart()
+        val user = App.Globals.auth.currentUser?.uid
         val listener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 tournaments.clear()
-                for (postSnapshot in dataSnapshot.children) {
-                    val t = postSnapshot.getValue(Tourney::class.java)!!
-                    if(!isLoggedIn() || t.organizers.contains(App.Globals.auth.currentUser!!.uid))
-                        tournaments.add(t)
+                if(user != null){
+                    for (postSnapshot in dataSnapshot.children) {
+                        val t = postSnapshot.getValue(Tourney::class.java)!!
+                        if(t.organizers.contains(user))
+                            tournaments.add(t)
+                    }
+                } else {
+                    for (postSnapshot in dataSnapshot.children) {
+                        val t = postSnapshot.getValue(Tourney::class.java)!!
+                        if(t.privacy != Tourney.PRIVACY_PRIVATE)
+                            tournaments.add(t)
+                    }
                 }
-                rec_list.adapter = TournamentListAdapter(App.Globals.ctx(), tournaments)
+                rec_list.adapter = TournamentListAdapter(ctx, tournaments)
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Toast.makeText(baseContext, "Failed to load tournaments.",
