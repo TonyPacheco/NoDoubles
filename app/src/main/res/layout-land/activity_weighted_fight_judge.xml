@@ -52,6 +52,48 @@
         android:tint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_double" />
 
+
+    <LinearLayout
+        android:id="@+id/timer_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <NumberPicker
+            android:id="@+id/timer_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"/>
+        <NumberPicker
+            android:id="@+id/timer_seconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_timer"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_above="@id/btn_end_fight"
+        android:layout_alignBottom="@+id/btn_end_fight"
+        android:layout_centerHorizontal="true"
+        android:background="@android:drawable/editbox_background_normal"
+        android:text="@string/start"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
     <ImageView
         android:id="@+id/plus1"
         android:layout_width="48dp"
@@ -218,9 +260,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="20dp"
         android:background="@android:drawable/editbox_background_normal"
-        android:text="End Fight"
+        android:text="@string/end_fight"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
@@ -233,7 +275,6 @@
         android:layout_height="39dp"
         android:layout_alignTop="@+id/name1"
         android:layout_toEndOf="@+id/name1"
-        android:text="0"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
@@ -245,7 +286,6 @@
         android:layout_height="39dp"
         android:layout_alignTop="@+id/name1"
         android:layout_toStartOf="@+id/name2"
-        android:text="0"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="30sp"

@@ -125,7 +125,7 @@ class FightJudgeActivity : AppCompatActivity() {
     }
 
     private fun manageFightEnd(){
-        var winner = 0 // In the event of a tie, both fighters lose
+        var winner = 0 /* In the event of a tie, both fighters lose */
         if(fighter1.currentScore > fighter2.currentScore) winner = 1
         if(fighter2.currentScore > fighter1.currentScore) winner = 2
         fight?.resolveFight()

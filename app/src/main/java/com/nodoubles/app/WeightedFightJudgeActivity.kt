@@ -1,6 +1,7 @@
 package com.nodoubles.app
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.NumberPicker
 import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -9,12 +10,22 @@ import com.nodoubles.app.Models.Fight
 import com.nodoubles.app.Models.Fighter
 import com.nodoubles.app.Models.ScoreScheme
 import kotlinx.android.synthetic.main.activity_weighted_fight_judge.*
+import android.os.CountDownTimer
+
+
 
 class WeightedFightJudgeActivity : AppCompatActivity() {
 
     private var fight: Fight? = null
     private var fighter1: Fighter = Fighter(0)
     private var fighter2: Fighter = Fighter(0)
+    private lateinit var slider_minutes: NumberPicker
+    private lateinit var slider_seconds: NumberPicker
+    private var minutes = 1
+    private var seconds = 30
+    var timerTicking = false
+    var timer: CountDownTimer? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +36,8 @@ class WeightedFightJudgeActivity : AppCompatActivity() {
 
         pts1!!.text = "0"
         pts2!!.text = "0"
+
+        initTimer()
 
         plus1!!.setOnClickListener{
             addScore(1,1)
@@ -44,6 +57,9 @@ class WeightedFightJudgeActivity : AppCompatActivity() {
         }
         btn_end_fight!!.setOnClickListener{
             finaliseFight()
+        }
+        btn_timer!!.setOnClickListener{
+            toggleTimer()
         }
     }
 
@@ -229,4 +245,64 @@ class WeightedFightJudgeActivity : AppCompatActivity() {
 
     }
 
+    private fun initTimer(){
+        slider_minutes = timer_minutes!!
+        slider_seconds = timer_seconds!!
+        val minuteOptions = Array(6) { "$it" }
+        val secondOptions = Array(60){ "$it" }
+        for(i in 0..9)
+            secondOptions[i] = "0$i"
+
+        slider_minutes.minValue = 0
+        slider_minutes.maxValue = 5
+        slider_minutes.wrapSelectorWheel = false
+        slider_minutes.value = 1
+        slider_minutes.displayedValues = minuteOptions
+        slider_minutes.setOnScrollListener{ s_min: NumberPicker, i: Int ->
+
+        }
+        slider_minutes.setOnValueChangedListener{ _, _, new: Int ->
+            minutes = new
+            if(timerTicking)
+                toggleTimer()
+        }
+
+        slider_seconds.minValue = 0
+        slider_seconds.maxValue = 59
+        slider_seconds.wrapSelectorWheel = false
+        slider_seconds.value = 30
+        slider_seconds.displayedValues = secondOptions
+        slider_seconds.setOnScrollListener{ s_sec: NumberPicker, i: Int ->
+
+        }
+        slider_seconds.setOnValueChangedListener{ _, _, new: Int ->
+            seconds = new
+            if(timerTicking)
+                toggleTimer()
+        }
+    }
+
+    private fun toggleTimer(){
+        timerTicking = !timerTicking
+        btn_timer!!.text = if(timerTicking) "STOP" else "START"
+        if(timerTicking){
+            timer = object : CountDownTimer((minutes.toLong() * 60 * 1000) + (seconds * 1000), 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    --seconds
+                    if(seconds < 0){
+                        seconds = 59
+                        if(minutes != 0)
+                            --minutes
+                    }
+                    slider_minutes.value = minutes
+                    slider_seconds.value = seconds
+                }
+                override fun onFinish() {
+                    toggleTimer()
+                }
+            }.start()
+        } else {
+            timer!!.cancel()
+        }
+    }
 }

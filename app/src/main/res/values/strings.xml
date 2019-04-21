@@ -100,4 +100,6 @@
     <string name="open_to_public">Open to public</string>
     <string name="password_protected">Password protected</string>
     <string name="organizers_only">Organizers only</string>
+    <string name="start">Start</string>
+    <string name="end_fight">End Fight</string>
 </resources>
